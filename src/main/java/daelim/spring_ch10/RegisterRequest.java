@@ -18,7 +18,7 @@ public class RegisterRequest {
     @NotEmpty
     private String name;
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
@@ -50,7 +50,7 @@ public class RegisterRequest {
         this.name = name;
     }
 
-    public boolean isPasswordEqualToConfirmPassword(){
+    public boolean isPasswordEqualToConfirmPassword() {
         return password.equals(passwordConfirm);
     }
 }

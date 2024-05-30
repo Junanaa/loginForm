@@ -23,7 +23,7 @@ public class RegisterController {
     private MemberRegisterService memberRegisterService;
 
     @GetMapping("/main")
-    public String main(){
+    public String main() {
         return "main";
     }
 
@@ -34,20 +34,20 @@ public class RegisterController {
     }
 
     @GetMapping("/register/step2")
-    public String handleStep2Get(){
+    public String handleStep2Get() {
         System.out.println("[GET] step2>>>> ");
         return "redirect:/register/step1";
     }
 
     @PostMapping("/register/step2")
-    public String handleStep2(@RequestParam(value="agree", defaultValue = "false") Boolean agree
+    public String handleStep2(@RequestParam(value = "agree", defaultValue = "false") Boolean agree
             , Model model) {
         System.out.println("[POST] step2 >>>");
-        System.out.println("step2::agree = "+ agree);
-        if(!agree) {
+        System.out.println("step2::agree = " + agree);
+        if (!agree) {
             return "register/step1";
         }
-        model.addAttribute("registerRequest",new RegisterRequest());
+        model.addAttribute("registerRequest", new RegisterRequest());
         return "register/step2";
     }
 
@@ -67,7 +67,7 @@ public class RegisterController {
 //    }
 
 
-//    @PostMapping("/register/step2")
+    //    @PostMapping("/register/step2")
 //    public String handleStep2(HttpServletRequest request) {
 //        System.out.println("Step 2 >>>>> ");
 //        String agree = request.getParameter("agree");
@@ -77,7 +77,7 @@ public class RegisterController {
 //        return "register/step2";
 //    }
     @PostMapping("/register/step3")
-    public String handleStep3(@Valid RegisterRequest registerRequest, Errors errors){
+    public String handleStep3(@Valid RegisterRequest registerRequest, Errors errors) {
         System.out.println("[POST] step3 >>>>");
 //        String email =request.getParameter("eamil");
 //        String name = request.getParameter("name");
@@ -91,16 +91,15 @@ public class RegisterController {
 //        regReq.setPassword(password);
 //        regReq.setConfirmPassword(passwordConfirm);
 
-        System.out.println("email : "+ registerRequest.getEmail());
-        System.out.println(("name : "+ registerRequest.getName()));
+        System.out.println("email : " + registerRequest.getEmail());
+        System.out.println(("name : " + registerRequest.getName()));
 
 //        new RegisterRequestValidator().validate(registerRequest, errors);
         System.out.println("hasErrors() : " + errors.hasErrors());
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "register/step2";
         }
         //service 로직 처리
-
 
 
         try {

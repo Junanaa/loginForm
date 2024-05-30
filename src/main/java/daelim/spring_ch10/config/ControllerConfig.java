@@ -26,7 +26,7 @@ public class ControllerConfig {
 
     @Bean
     public LoginController loginController() {
-        LoginController loginController= new LoginController();
+        LoginController loginController = new LoginController();
         loginController.setAuthService(authService);
         return loginController;
     }

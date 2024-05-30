@@ -13,25 +13,25 @@ public class MemberRegisterService {
         this.memberDao = memberDao;
     }
 
-    public void regist(RegisterRequest req){
+    public void regist(RegisterRequest req) {
         // 1. 이메일로 회원 데이터 조회
         Member member = memberDao.selectByEmail(req.getEmail());
         // 2. member != null : 이미 이메일을 가진 회원이 존재
         // Exception 발생
-        if(member != null){
-            throw new DuplicationMemberException("Duplication Email : "+ req.getEmail());
+        if (member != null) {
+            throw new DuplicationMemberException("Duplication Email : " + req.getEmail());
         }
         // 3. 신규 회원 등록
         memberDao.insert(new Member(req.getEmail(), req.getPassword(), req.getName(),
-                LocalDateTime.now()
+                        LocalDateTime.now()
                 )
         );
     }
 
-    public void selectAll(){
+    public void selectAll() {
         Collection<Member> members = memberDao.selectAll();
-        for(Member member : members){
-            System.out.println(member.getId()+ " : "+ member.getName()+ "("+ member.getEmail()+")" );
+        for (Member member : members) {
+            System.out.println(member.getId() + " : " + member.getName() + "(" + member.getEmail() + ")");
         }
     }
 }
