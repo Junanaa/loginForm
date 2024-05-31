@@ -1,4 +1,9 @@
-package daelim.spring_ch10;
+package daelim.spring_ch10.service;
+
+import daelim.spring_ch10.DuplicationMemberException;
+import daelim.spring_ch10.Member;
+import daelim.spring_ch10.MemberDao;
+import daelim.spring_ch10.RegisterRequest;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

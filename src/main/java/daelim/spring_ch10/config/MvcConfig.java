@@ -1,5 +1,6 @@
 package daelim.spring_ch10.config;
 
+import daelim.spring_ch10.CommonExceptionHandler;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -30,5 +31,10 @@ public class MvcConfig implements WebMvcConfigurer {
         messageSource.setBasename("messages.label_ko");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
+    }
+
+    @Bean
+    public CommonExceptionHandler commonExceptionHandler() {
+        return new CommonExceptionHandler();
     }
 }

@@ -3,17 +3,15 @@ package daelim.spring_ch10.controller;
 
 import org.springframework.validation.Errors;
 import daelim.spring_ch10.DuplicationMemberException;
-import daelim.spring_ch10.MemberRegisterService;
+import daelim.spring_ch10.service.MemberRegisterService;
 import daelim.spring_ch10.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller

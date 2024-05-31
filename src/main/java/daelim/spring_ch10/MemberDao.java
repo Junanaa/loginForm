@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class MemberDao {
@@ -18,7 +19,7 @@ public class MemberDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public class MemberRowMapper implements RowMapper<Member>{
+    public class MemberRowMapper implements RowMapper<Member> {
         @Override
         public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
             Member member = new Member(
@@ -41,7 +42,7 @@ public class MemberDao {
         return results.isEmpty() ? null : results.get(0);
     }
 
-    public void insert(Member member){
+    public void insert(Member member) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -49,7 +50,7 @@ public class MemberDao {
                 // 두 번째 파라미터는 자동 생성되는 키 컬럼 목록을 지정할 때 사용
                 PreparedStatement preparedStatement = con.prepareStatement(
                         "insert into MEMBER(EMAIL, PASSWORD, NAME, REGDATE) values (?,?,?,?)"
-                        , new String[] {"ID"});
+                        , new String[]{"ID"});
                 preparedStatement.setString(1, member.getEmail());
                 preparedStatement.setString(2, member.getPassword());
                 preparedStatement.setString(3, member.getName());
@@ -66,11 +67,11 @@ public class MemberDao {
                 "update MEMBER set PASSWORD = ? where EMAIL = ?",
                 member.getPassword(), member.getEmail()
         );
-        System.out.println("updateCount : "+ updateCount);
+        System.out.println("updateCount : " + updateCount);
     }
 
 
-    public List<Member> selectAll(){
+    public List<Member> selectAll() {
 
         List<Member> results = jdbcTemplate.query(
                 "select * from MEMBER",
@@ -79,11 +80,29 @@ public class MemberDao {
         return results;
     }
 
-    public int count(){
+    public int count() {
         Integer count = jdbcTemplate.queryForObject(
                 "select count(*) from MEMBER", Integer.class
         );
         return count;
+    }
+
+    public List<Member> selectByRegdate(LocalDateTime from, LocalDateTime to) {
+        List<Member> results = jdbcTemplate.query(
+                "SELECT * FROM MEMBER WHERE REGDATE BETWEEN ? AND ? ORDER BY REGDATE DESC",
+                new MemberRowMapper(), from, to
+        );
+        return results;
+    }
+
+    public Member selectById(Long id) {
+        List<Member> results = jdbcTemplate.query(
+                "select * from MEMBER where id = ?",
+                new MemberRowMapper(),
+                id
+        );
+
+        return results.isEmpty() ? null : results.get(0);
     }
 }
 

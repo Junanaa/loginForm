@@ -1,5 +1,8 @@
-package daelim.spring_ch10;
+package daelim.spring_ch10.service;
 
+import daelim.spring_ch10.Member;
+import daelim.spring_ch10.MemberDao;
+import daelim.spring_ch10.MemberNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 public class ChangePasswordService {

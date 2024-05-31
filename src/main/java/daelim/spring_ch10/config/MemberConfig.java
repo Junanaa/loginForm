@@ -1,9 +1,10 @@
 package daelim.spring_ch10.config;
 
-import daelim.spring_ch10.ChangePasswordService;
+import daelim.spring_ch10.service.ChangePasswordService;
 import daelim.spring_ch10.MemberDao;
-import daelim.spring_ch10.MemberRegisterService;
+import daelim.spring_ch10.service.MemberRegisterService;
 import daelim.spring_ch10.service.AuthService;
+import daelim.spring_ch10.service.MemberService;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,4 +52,7 @@ public class MemberConfig {
     public AuthService authService() {
         return new AuthService();
     }
+
+    @Bean
+    public MemberService memberService(){return  new MemberService();}
 }
